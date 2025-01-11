@@ -92,10 +92,8 @@ public class UEKorpaTest {
 
         WebElement KorpaHover = webDriver.findElement(By.linkText("MOJA KORPA")); // Update with actual button's locator
 
-        // Create an Actions instance
         Actions actions = new Actions(webDriver);
 
-        // Perform hover action
         actions.moveToElement(KorpaHover).perform();
 
         Thread.sleep(2000);
