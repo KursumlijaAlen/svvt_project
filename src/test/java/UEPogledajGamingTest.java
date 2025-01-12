@@ -37,10 +37,8 @@ public class UEPogledajGamingTest {
 
         WebElement GamingHover = webDriver.findElement(By.linkText("GAMING"));
 
-        // Create an Actions object to simulate mouse movements
         Actions actions = new Actions(webDriver);
 
-        // Hover over the element
         actions.moveToElement(GamingHover).perform();
 
         Thread.sleep(2000);

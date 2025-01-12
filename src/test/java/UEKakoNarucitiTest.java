@@ -7,13 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UEPogledajTest {
+public class UEKakoNarucitiTest {
     private static WebDriver webDriver;
     private static String baseUrl;
+
 
     @BeforeAll
     public static void setUp() {
@@ -27,30 +27,21 @@ public class UEPogledajTest {
         baseUrl = "https://www.ue.ba/";
     }
 
+
     @Test
-    public void testUEPogledaj() throws InterruptedException {
+    public void testKakoNaruciti() throws InterruptedException {
         webDriver.get(baseUrl);
 
         Thread.sleep(2000);
 
-        WebElement PogledajHover = webDriver.findElement(By.cssSelector("h3.kw-details-title"));
-        Actions actions = new Actions(webDriver);
-        actions.moveToElement(PogledajHover).perform();
+        WebElement KnKlik = webDriver.findElement(By.cssSelector(".hidden-xs"));
+        KnKlik.click();
 
         Thread.sleep(2000);
 
-        WebElement PogledajClick = webDriver.findElement(By.linkText("POGLEDAJ"));
-        PogledajClick.click();
-
-        Thread.sleep(2000);
-
-        WebElement proizvodTest = webDriver.findElement(By.xpath("//*[@id=\"content\"]/div/div/div/div/div[1]/div[2]/div/h1"));
-        assertEquals("BORG Wireless Miš MW02", proizvodTest.getText());
-
+        WebElement naslov = webDriver.findElement(By.cssSelector("m_title"));
+        assertEquals("KAKO NARUČITI", naslov.getText());
     }
-
-
-
 
     @AfterAll
     public static void tearDown() {
@@ -59,3 +50,4 @@ public class UEPogledajTest {
         }
     }
 }
+

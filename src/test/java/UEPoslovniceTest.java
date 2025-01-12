@@ -11,7 +11,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UEPogledajTest {
+public class UEPoslovniceTest {
     private static WebDriver webDriver;
     private static String baseUrl;
 
@@ -27,30 +27,57 @@ public class UEPogledajTest {
         baseUrl = "https://www.ue.ba/";
     }
 
+
     @Test
-    public void testUEPogledaj() throws InterruptedException {
+    public void testPoslovnice() throws InterruptedException {
         webDriver.get(baseUrl);
 
         Thread.sleep(2000);
 
-        WebElement PogledajHover = webDriver.findElement(By.cssSelector("h3.kw-details-title"));
+
         Actions actions = new Actions(webDriver);
-        actions.moveToElement(PogledajHover).perform();
 
-        Thread.sleep(2000);
+        actions.scrollByAmount(0, 1500).perform();
 
-        WebElement PogledajClick = webDriver.findElement(By.linkText("POGLEDAJ"));
-        PogledajClick.click();
 
-        Thread.sleep(2000);
+        Thread.sleep(3000);
 
-        WebElement proizvodTest = webDriver.findElement(By.xpath("//*[@id=\"content\"]/div/div/div/div/div[1]/div[2]/div/h1"));
-        assertEquals("BORG Wireless Miš MW02", proizvodTest.getText());
+        WebElement poslovnicaClick = webDriver.findElement(By.linkText("prodajnih mjesta"));
+        poslovnicaClick.click();
 
+        Thread.sleep(3000);
+
+        WebElement nameClick = webDriver.findElement(By.id("cf_name"));
+        nameClick.click();
+        nameClick.sendKeys("Faris");
+
+        Thread.sleep(3000);
+
+
+        WebElement surnameClick = webDriver.findElement(By.id("cf_lastname"));
+        surnameClick.click();
+        surnameClick.sendKeys("Leventa");
+
+        Thread.sleep(3000);
+
+        WebElement emailClick = webDriver.findElement(By.id("cf_email"));
+        emailClick.click();
+        emailClick.sendKeys("faris.leventa@stu.ibu.edu.ba");
+
+        Thread.sleep(3000);
+
+        WebElement subjectClick = webDriver.findElement(By.id("cf_subject"));
+        subjectClick.click();
+        subjectClick.sendKeys("lorem ipsum...");
+
+        Thread.sleep(3000);
+
+        WebElement messageClick = webDriver.findElement(By.id("cf_message"));
+        messageClick.click();
+        messageClick.sendKeys("lorem ipsum..");
+
+        Thread.sleep(3000);
     }
-
-
-
 
     @AfterAll
     public static void tearDown() {

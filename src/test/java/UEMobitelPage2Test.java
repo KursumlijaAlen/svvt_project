@@ -11,7 +11,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UEPogledajTest {
+public class UEMobitelPage2Test {
     private static WebDriver webDriver;
     private static String baseUrl;
 
@@ -27,30 +27,38 @@ public class UEPogledajTest {
         baseUrl = "https://www.ue.ba/";
     }
 
+
     @Test
-    public void testUEPogledaj() throws InterruptedException {
+    public void testMobitel2Page() throws InterruptedException {
         webDriver.get(baseUrl);
 
         Thread.sleep(2000);
 
-        WebElement PogledajHover = webDriver.findElement(By.cssSelector("h3.kw-details-title"));
+        WebElement Mobitel = webDriver.findElement(By.linkText("MOBITELI"));
+        Mobitel.click();
+
+        Thread.sleep(2000);
+
         Actions actions = new Actions(webDriver);
-        actions.moveToElement(PogledajHover).perform();
 
-        Thread.sleep(2000);
+        actions.scrollByAmount(0, 1500).perform();
 
-        WebElement PogledajClick = webDriver.findElement(By.linkText("POGLEDAJ"));
-        PogledajClick.click();
 
-        Thread.sleep(2000);
+        Thread.sleep(3000);
 
-        WebElement proizvodTest = webDriver.findElement(By.xpath("//*[@id=\"content\"]/div/div/div/div/div[1]/div[2]/div/h1"));
-        assertEquals("BORG Wireless Miš MW02", proizvodTest.getText());
+        WebElement page2 = webDriver.findElement(By.cssSelector(".paging:nth-child(3) > span"));
+        page2.click();
 
+        Thread.sleep(3000);
+
+        WebElement proizvodMobitel = webDriver.findElement(By.cssSelector(".kw-details-title"));
+        proizvodMobitel.click();
+
+        Thread.sleep(3000);
+
+        WebElement proizvodTest = webDriver.findElement(By.xpath("//*[@id=\"prodload\"]/div[1]/div/div/div/div/div[1]/div[2]/div/h1"));
+        assertEquals("Xiaomi Smartphone Redmi Note 12S 8/256 Green", proizvodTest.getText());
     }
-
-
-
 
     @AfterAll
     public static void tearDown() {

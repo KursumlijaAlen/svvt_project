@@ -8,12 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UEPogledajTest {
+public class UENewsletterTest {
     private static WebDriver webDriver;
     private static String baseUrl;
+    private static String email;
 
     @BeforeAll
     public static void setUp() {
@@ -25,32 +25,38 @@ public class UEPogledajTest {
         options.addArguments("--start-maximized");
         webDriver = new ChromeDriver(options);
         baseUrl = "https://www.ue.ba/";
+        email = "faris.leventa@stu.ibu.edu.ba";
     }
 
+
     @Test
-    public void testUEPogledaj() throws InterruptedException {
+    public void testUENewsletter() throws InterruptedException {
         webDriver.get(baseUrl);
 
         Thread.sleep(2000);
 
-        WebElement PogledajHover = webDriver.findElement(By.cssSelector("h3.kw-details-title"));
         Actions actions = new Actions(webDriver);
-        actions.moveToElement(PogledajHover).perform();
+
+        actions.scrollByAmount(0, 1700).perform();
+
+        Thread.sleep(1000);
+
+        WebElement newsletter = webDriver.findElement(By.id("EMAIL"));
+        newsletter.click();
+        newsletter.sendKeys(email);
 
         Thread.sleep(2000);
 
-        WebElement PogledajClick = webDriver.findElement(By.linkText("POGLEDAJ"));
-        PogledajClick.click();
+        WebElement subscribe = webDriver.findElement(By.name("subscribe"));
+        subscribe.click();
 
         Thread.sleep(2000);
 
-        WebElement proizvodTest = webDriver.findElement(By.xpath("//*[@id=\"content\"]/div/div/div/div/div[1]/div[2]/div/h1"));
-        assertEquals("BORG Wireless Miš MW02", proizvodTest.getText());
+        String fail = webDriver.findElement(By.xpath("//*[@id=\"NLinput\"]/p[2]")).getText();
+        assertEquals(fail, "Nećemo Vas spamovati!");
 
+        Thread.sleep(2000);
     }
-
-
-
 
     @AfterAll
     public static void tearDown() {
