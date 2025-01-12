@@ -8,11 +8,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UEBrzaKupovinaTest {
+public class UEPogledajGamingTest {
     private static WebDriver webDriver;
     private static String baseUrl;
+    private static String email;
 
     @BeforeAll
     public static void setUp() {
@@ -24,43 +26,46 @@ public class UEBrzaKupovinaTest {
         options.addArguments("--start-maximized");
         webDriver = new ChromeDriver(options);
         baseUrl = "https://www.ue.ba/";
+        email = "faris.leventa@stu.ibu.edu.ba";  // Replace with a valid Adidas email
     }
 
-
     @Test
-    public void testUEBrzaKupovina() throws InterruptedException {
+    public void TestGaming() throws InterruptedException {
         webDriver.get(baseUrl);
 
         Thread.sleep(2000);
 
+        WebElement GamingHover = webDriver.findElement(By.linkText("GAMING"));
+
+        // Create an Actions object to simulate mouse movements
         Actions actions = new Actions(webDriver);
 
-        actions.scrollByAmount(0, 1500).perform();
+        // Hover over the element
+        actions.moveToElement(GamingHover).perform();
 
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
-        WebElement Proizvod = webDriver.findElement(By.cssSelector(".related:nth-child(2) .product:nth-child(1)"));
-        Proizvod.click();
 
-        Thread.sleep(3000);
 
-        WebElement Brza = webDriver.findElement(By.cssSelector(".button:nth-child(2)"));
-        Brza.click();
+        WebElement AULAClick = webDriver.findElement(By.linkText("AULA"));
+        AULAClick.click();
 
-        Thread.sleep(3000);
+        Thread.sleep(2000);
 
-        WebElement brzaKupovina = webDriver.findElement(By.cssSelector(".col-sm-12 > .button"));
-        brzaKupovina.click();
 
-        WebElement Polja = webDriver.findElement(By.id("upozorenje"));
-        assertEquals("Neka polja nisu unesena!", Polja.getText());
+        WebElement ProizvodClick = webDriver.findElement(By.xpath("//div[@id='page']/ul/li[2]/div/span/div[2]"));
+        ProizvodClick.click();
 
-        Thread.sleep(1000);
-        webDriver.getCurrentUrl();
-        String title = webDriver.getTitle();
-        System.out.println(title);
+        Thread.sleep(2000);
 
+        WebElement Polja = webDriver.findElement(By.xpath("//*[@id=\"prodload\"]/div[1]/div/div/div/div/div[1]/div[2]/div/h1"));
+        assertEquals("AULA Gaming MiÅ¡ RGB S18", Polja.getText());
+
+        Thread.sleep(5000);
     }
+
+
+
 
     @AfterAll
     public static void tearDown() {

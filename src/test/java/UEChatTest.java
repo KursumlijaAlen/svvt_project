@@ -3,16 +3,18 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UEBrzaKupovinaTest {
+public class UEChatTest {
     private static WebDriver webDriver;
     private static String baseUrl;
+    private static String email;
 
     @BeforeAll
     public static void setUp() {
@@ -24,43 +26,32 @@ public class UEBrzaKupovinaTest {
         options.addArguments("--start-maximized");
         webDriver = new ChromeDriver(options);
         baseUrl = "https://www.ue.ba/";
+        email = "faris.leventa@stu.ibu.edu.ba";  // Replace with a valid Adidas email
     }
-
 
     @Test
-    public void testUEBrzaKupovina() throws InterruptedException {
+    public void testChat() throws InterruptedException {
         webDriver.get(baseUrl);
 
-        Thread.sleep(2000);
+        Thread.sleep(4000);
 
-        Actions actions = new Actions(webDriver);
-
-        actions.scrollByAmount(0, 1500).perform();
-
-        Thread.sleep(1000);
-
-        WebElement Proizvod = webDriver.findElement(By.cssSelector(".related:nth-child(2) .product:nth-child(1)"));
-        Proizvod.click();
+        WebElement chatOpen = webDriver.findElement(By.id("f84cenbq3vf81736703707117"));
+        chatOpen.click();
 
         Thread.sleep(3000);
 
-        WebElement Brza = webDriver.findElement(By.cssSelector(".button:nth-child(2)"));
-        Brza.click();
+        WebElement inputMessage = webDriver.findElement(By.id("tawk-bubble-container"));
+        inputMessage.click();
+        inputMessage.sendKeys("Zdravo");
+        inputMessage.sendKeys(Keys.ENTER);
 
         Thread.sleep(3000);
 
-        WebElement brzaKupovina = webDriver.findElement(By.cssSelector(".col-sm-12 > .button"));
-        brzaKupovina.click();
-
-        WebElement Polja = webDriver.findElement(By.id("upozorenje"));
-        assertEquals("Neka polja nisu unesena!", Polja.getText());
-
-        Thread.sleep(1000);
-        webDriver.getCurrentUrl();
-        String title = webDriver.getTitle();
-        System.out.println(title);
 
     }
+
+
+
 
     @AfterAll
     public static void tearDown() {

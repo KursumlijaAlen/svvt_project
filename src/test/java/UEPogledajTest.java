@@ -8,9 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UEBrzaKupovinaTest {
+public class UEPogledajTest {
     private static WebDriver webDriver;
     private static String baseUrl;
 
@@ -26,41 +25,28 @@ public class UEBrzaKupovinaTest {
         baseUrl = "https://www.ue.ba/";
     }
 
-
     @Test
-    public void testUEBrzaKupovina() throws InterruptedException {
+    public void testUEPogledaj() throws InterruptedException {
         webDriver.get(baseUrl);
 
         Thread.sleep(2000);
 
+        WebElement PogledajHover = webDriver.findElement(By.cssSelector("h3.kw-details-title"));
         Actions actions = new Actions(webDriver);
+        actions.moveToElement(PogledajHover).perform();
 
-        actions.scrollByAmount(0, 1500).perform();
+        Thread.sleep(2000);
 
-        Thread.sleep(1000);
+        WebElement PogledajClick = webDriver.findElement(By.linkText("POGLEDAJ"));
+        PogledajClick.click();
 
-        WebElement Proizvod = webDriver.findElement(By.cssSelector(".related:nth-child(2) .product:nth-child(1)"));
-        Proizvod.click();
+        Thread.sleep(2000);
 
-        Thread.sleep(3000);
-
-        WebElement Brza = webDriver.findElement(By.cssSelector(".button:nth-child(2)"));
-        Brza.click();
-
-        Thread.sleep(3000);
-
-        WebElement brzaKupovina = webDriver.findElement(By.cssSelector(".col-sm-12 > .button"));
-        brzaKupovina.click();
-
-        WebElement Polja = webDriver.findElement(By.id("upozorenje"));
-        assertEquals("Neka polja nisu unesena!", Polja.getText());
-
-        Thread.sleep(1000);
-        webDriver.getCurrentUrl();
-        String title = webDriver.getTitle();
-        System.out.println(title);
 
     }
+
+
+
 
     @AfterAll
     public static void tearDown() {

@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UEBrzaKupovinaTest {
+public class UESocialsLinkTest {
     private static WebDriver webDriver;
     private static String baseUrl;
 
@@ -28,37 +28,50 @@ public class UEBrzaKupovinaTest {
 
 
     @Test
-    public void testUEBrzaKupovina() throws InterruptedException {
+    public void testUEInstagramLink() throws InterruptedException {
         webDriver.get(baseUrl);
 
         Thread.sleep(2000);
 
         Actions actions = new Actions(webDriver);
 
-        actions.scrollByAmount(0, 1500).perform();
+        actions.scrollByAmount(0, 1700).perform();
 
         Thread.sleep(1000);
 
-        WebElement Proizvod = webDriver.findElement(By.cssSelector(".related:nth-child(2) .product:nth-child(1)"));
-        Proizvod.click();
+        WebElement Insta = webDriver.findElement(By.cssSelector("li:nth-child(3) > a > img"));
+        Insta.click();
 
         Thread.sleep(3000);
 
-        WebElement Brza = webDriver.findElement(By.cssSelector(".button:nth-child(2)"));
-        Brza.click();
-
-        Thread.sleep(3000);
-
-        WebElement brzaKupovina = webDriver.findElement(By.cssSelector(".col-sm-12 > .button"));
-        brzaKupovina.click();
-
-        WebElement Polja = webDriver.findElement(By.id("upozorenje"));
-        assertEquals("Neka polja nisu unesena!", Polja.getText());
-
-        Thread.sleep(1000);
-        webDriver.getCurrentUrl();
         String title = webDriver.getTitle();
-        System.out.println(title);
+        assertEquals("UNI-EXPERT - Prodaja i servis IT opreme, mobilnih telefona i LED TV", title);
+
+
+
+    }
+
+    @Test
+    public void testUEFacebookLink() throws InterruptedException {
+        webDriver.get(baseUrl);
+
+        Thread.sleep(2000);
+
+        Actions actions = new Actions(webDriver);
+
+        actions.scrollByAmount(0, 1700).perform();
+
+        Thread.sleep(1000);
+
+        WebElement Insta = webDriver.findElement(By.cssSelector("li:nth-child(2) > a > img"));
+        Insta.click();
+
+        Thread.sleep(3000);
+
+        String title = webDriver.getTitle();
+        assertEquals("UNI-EXPERT - Prodaja i servis IT opreme, mobilnih telefona i LED TV", title);
+
+
 
     }
 

@@ -28,7 +28,7 @@ public class UEFilterTest {
     }
 
     @Test
-    public void testUELogin() throws InterruptedException {
+    public void testUEFilter() throws InterruptedException {
         webDriver.get(baseUrl);
 
         Thread.sleep(1000);
