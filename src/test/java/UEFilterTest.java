@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class UEFilterTest {
     private static WebDriver webDriver;
     private static String baseUrl;
-    private static String email;
 
     @BeforeAll
     public static void setUp() {
@@ -26,7 +25,6 @@ public class UEFilterTest {
         options.addArguments("--start-maximized");
         webDriver = new ChromeDriver(options);
         baseUrl = "https://www.ue.ba/";
-        email = "faris.leventa@stu.ibu.edu.ba";  // Replace with a valid Adidas email
     }
 
     @Test
@@ -35,7 +33,7 @@ public class UEFilterTest {
 
         Thread.sleep(1000);
 
-        WebElement KorpaHover = webDriver.findElement(By.linkText("RAČUNARI")); // Update with actual button's locator
+        WebElement KorpaHover = webDriver.findElement(By.linkText("RAČUNARI"));
 
         Actions actions = new Actions(webDriver);
 

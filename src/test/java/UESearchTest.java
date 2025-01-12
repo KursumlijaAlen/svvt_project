@@ -13,8 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class UESearchTest {
     private static WebDriver webDriver;
     private static String baseUrl;
-    private static String email;
-    private static String ime;
 
 
     @BeforeAll
@@ -27,8 +25,6 @@ public class UESearchTest {
         options.addArguments("--start-maximized");
         webDriver = new ChromeDriver(options);
         baseUrl = "https://www.ue.ba/";
-        email = "faris.leventa+test2@stu.ibu.edu.ba";  // Svaki put inkrementirati
-        ime = "Fareleva+test2"; // Svaki put inkrementirati
     }
 
 

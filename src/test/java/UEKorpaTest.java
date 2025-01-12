@@ -90,7 +90,7 @@ public class UEKorpaTest {
         Thread.sleep(2000);
 
 
-        WebElement KorpaHover = webDriver.findElement(By.linkText("MOJA KORPA")); // Update with actual button's locator
+        WebElement KorpaHover = webDriver.findElement(By.linkText("MOJA KORPA"));
 
         Actions actions = new Actions(webDriver);
 

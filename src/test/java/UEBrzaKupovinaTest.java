@@ -7,13 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UELoginTest {
+public class UEBrzaKupovinaTest {
     private static WebDriver webDriver;
     private static String baseUrl;
-    private static String email;
 
     @BeforeAll
     public static void setUp() {
@@ -25,50 +25,39 @@ public class UELoginTest {
         options.addArguments("--start-maximized");
         webDriver = new ChromeDriver(options);
         baseUrl = "https://www.ue.ba/";
-        email = "faris.leventa@stu.ibu.edu.ba";
     }
 
+
     @Test
-    public void testUELogin() throws InterruptedException {
+    public void testUEBrzaKupovina() throws InterruptedException {
         webDriver.get(baseUrl);
 
         Thread.sleep(2000);
 
-        WebElement accountIcon = webDriver.findElement(By.id("signin2"));
-        accountIcon.click();
+        Actions actions = new Actions(webDriver);
 
-        Thread.sleep(2000);
-
-        WebElement inputEmail = webDriver.findElement(By.id("username2"));
-        inputEmail.click();
-        inputEmail.sendKeys(email);
+        actions.scrollByAmount(0, 1500).perform();
 
         Thread.sleep(1000);
 
-        WebElement inputPassword = webDriver.findElement(By.id("userpassx"));
-        inputPassword.click();
-        inputPassword.sendKeys("fakultet");
+        WebElement Proizvod = webDriver.findElement(By.cssSelector(".related:nth-child(2) .product:nth-child(1)"));
+        Proizvod.click();
 
-        Thread.sleep(1000);
+        Thread.sleep(3000);
 
-        WebElement signIn = webDriver.findElement(By.id("signin"));
-        signIn.click();
+        WebElement Brza = webDriver.findElement(By.cssSelector(".button:nth-child(2)"));
+        Brza.click();
 
-        Thread.sleep(2000);
+        Thread.sleep(3000);
 
-        webDriver.navigate().refresh();
+        WebElement brzaKupovina = webDriver.findElement(By.cssSelector(".col-sm-12 > .button"));
+        brzaKupovina.click();
 
-        Thread.sleep(2000);
+        WebElement Polja = webDriver.findElement(By.id("upozorenje"));
+        assertEquals("Neka polja nisu unesena!", Polja.getText());
 
-        WebElement mojKonto = webDriver.findElement(By.linkText("MOJ KONTO"));
-        mojKonto.click();
+        Thread.sleep(5000);
 
-        Thread.sleep(2000);
-
-        WebElement mojKontoTest = webDriver.findElement(By.tagName("h1"));
-        assertEquals("Moj konto", mojKontoTest.getText());
-
-        Thread.sleep(2000);
     }
 
     @AfterAll
@@ -78,4 +67,3 @@ public class UELoginTest {
         }
     }
 }
-

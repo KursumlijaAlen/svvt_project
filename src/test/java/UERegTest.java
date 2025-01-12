@@ -27,8 +27,8 @@ public class UERegTest {
         options.addArguments("--start-maximized");
         webDriver = new ChromeDriver(options);
         baseUrl = "https://www.ue.ba/";
-        email = "faris.leventa+test2@stu.ibu.edu.ba";  // Svaki put inkrementirati
-        ime = "Fareleva+test2"; // Svaki put inkrementirati
+        email = "faris.leventa+test4@stu.ibu.edu.ba";  // Svaki put inkrementirati
+        ime = "Fareleva+test4"; // Svaki put inkrementirati
     }
 
 
